@@ -1,6 +1,7 @@
 const express = require('express');
 const pug = require('pug');
 const fs = require('fs');
+const port = process.env.PORT || 3000;
 
 const compiledFunction = pug.compileFile('./view/default.pug');
 const currentYear = new Date().getFullYear();
@@ -39,4 +40,6 @@ app.get('/bad', (req, rsp) => {
   });
 });
 
-app.listen(3000);
+app.listen(port, ()=> {
+  console.log(`Server is up on port ${port}`);
+});
