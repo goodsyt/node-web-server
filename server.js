@@ -3,7 +3,9 @@ const pug = require('pug');
 const fs = require('fs');
 const port = process.env.PORT || 3000;
 
-const compiledFunction = pug.compileFile('./view/default.pug');
+const compiledHome = pug.compileFile('./view/home.pug');
+const compiledAbout = pug.compileFile('./view/about.pug');
+const compiledProfile = pug.compileFile('./view/profile.pug');
 const currentYear = new Date().getFullYear();
 var app = express();
 
@@ -23,14 +25,20 @@ app.use((req, rsp, next) => {
   next();
 });
 app.get('/', (req, rsp) => {
-  rsp.send(compiledFunction({
+  rsp.send(compiledHome({
     pageTitle: 'Main page',
     currentYear: currentYear
   }));  
 });
 app.get('/about', (req, rsp) => {
-  rsp.send(compiledFunction({
+  rsp.send(compiledAbout({
     pageTitle: 'About page',
+    currentYear: currentYear
+  }));
+});
+app.get('/profile', (req, rsp) => {
+  rsp.send(compiledProfile({
+    pageTitle: 'Profile',
     currentYear: currentYear
   }));
 });
